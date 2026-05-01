@@ -1,0 +1,25 @@
+# Environments
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env/
+
+# Node
+node_modules/
+dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Uploads
+backend/uploads/
