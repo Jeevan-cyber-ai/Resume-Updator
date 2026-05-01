@@ -51,10 +51,31 @@ Target Job Title: {job_title}
 Candidate's Current Skills:
 {current_skills}
 
+Feedback from candidate (if any):
+{feedback_history}
+
 Instructions:
-1. Analyze the target job title and the candidate's current skills.
-2. Identify highly relevant skills, tools, and technologies for the '{job_title}' role that the candidate might be missing.
-3. Suggest a clean, comma-separated list of 10-15 skills that would strengthen this resume.
-4. Only suggest skills that are realistic for their level of experience.
-5. Return ONLY the comma-separated list of skills. No introductory text.
+1. From the candidate's current skills list, keep ONLY the ones that are highly relevant to the '{job_title}' role. Do NOT include irrelevant skills.
+2. Identify 6-10 NEW skills that are important for the '{job_title}' role but are NOT already in the candidate's current skills list. Do NOT repeat or rephrase skills that already exist.
+3. If there is feedback history, include user-requested skills and adjust the list according to their feedback.
+4. Return ONLY a single, clean, comma-separated list of the final result: the kept relevant skills + the new skills combined.
+5. NO introductory text, NO bullets, NO headers, NO explanations. Only the comma-separated list.
+"""
+
+IMPROVE_TITLE_PROMPT = """
+You are an expert career coach.
+
+Target Job Title: {job_title}
+
+Candidate's current experience summary:
+{experience}
+
+Feedback from candidate (if any):
+{feedback_history}
+
+Instructions:
+1. Analyze the target job title and the candidate's actual experience.
+2. Suggest 3 highly professional, impactful resume titles (e.g., "AI Enthusiast | Junior Data Scientist") that bridge their current experience with the target job title.
+3. If there is feedback history, adjust the suggestions according to their latest feedback.
+4. Return ONLY a bulleted list of the 3 title suggestions. No introductory text.
 """

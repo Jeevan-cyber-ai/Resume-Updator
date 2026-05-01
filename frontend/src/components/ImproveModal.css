@@ -213,6 +213,106 @@
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Skills UI */
+.skills-hint {
+  font-size: 12px;
+  color: #8a93b2;
+  margin-bottom: 12px;
+}
+
+.skill-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.skill-tag-editable {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(99, 120, 255, 0.15);
+  border: 1px solid rgba(99, 120, 255, 0.3);
+  color: #a0aee8;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.skill-tag-editable:hover {
+  background: rgba(255, 95, 126, 0.15);
+  border-color: #ff5f7e;
+  color: #ff5f7e;
+}
+.tag-remove {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.add-skill-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.btn-refresh {
+  background: transparent;
+  border: 1px dashed rgba(99, 120, 255, 0.4);
+  color: #6378ff;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s;
+  width: 100%;
+}
+.btn-refresh:hover {
+  background: rgba(99, 120, 255, 0.1);
+}
+
 .fade-in {
   animation: fadeIn 0.3s ease-out;
+}
+
+.project-name-input-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8a93b2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modal-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #6378ff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-outline {
+  background: transparent !important;
+  border: 1px solid #6378ff !important;
+  color: #6378ff !important;
+}
+
+.btn-outline:hover {
+  background: rgba(99, 120, 255, 0.1) !important;
 }

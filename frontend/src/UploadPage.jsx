@@ -74,14 +74,22 @@ export default function UploadPage() {
   const handleApplyImprovement = (section, generatedText) => {
     setResult(prev => {
       const updated = { ...prev }
-      if (section === 'objective') {
+      if (section === 'title') {
+        updated.summary = `✨ Recommended Titles:\n${generatedText}\n\n${updated.summary || updated.objectives || ''}`
+        updated.objectives = updated.summary
+      } else if (section === 'objective') {
         updated.summary = generatedText
         updated.objectives = generatedText
       } else if (section === 'projects') {
-        updated.projects = [{ name: '✨ AI Tailored Project', description: generatedText }, ...(updated.projects || [])]
+        try {
+          const projectObj = JSON.parse(generatedText)
+          updated.projects = [projectObj, ...(updated.projects || [])]
+        } catch (e) {
+          updated.projects = [{ name: '✨ AI Tailored Project', description: generatedText }, ...(updated.projects || [])]
+        }
       } else if (section === 'skills') {
-        const newSkills = generatedText.split(',').map(s => s.trim()).filter(s => s)
-        updated.skills = [...new Set([...(updated.skills || []), ...newSkills])]
+        const finalSkills = generatedText.split(',').map(s => s.trim()).filter(s => s)
+        updated.skills = finalSkills
       }
       return updated
     })
@@ -271,11 +279,11 @@ export default function UploadPage() {
                 <p className="scores-subtitle">How well your current resume matches the <strong>{result._jobTitle}</strong> role</p>
 
                 {[
-                  { label: 'Title Match', icon: '📛', score: scores.title_score, suggestion: scores.title_suggestion },
-                  { label: 'Skill Match', icon: '⚡', score: scores.skill_score, suggestion: scores.skill_suggestion },
-                  { label: 'Project Match', icon: '🛠️', score: scores.project_score, suggestion: scores.project_suggestion },
-                  { label: 'Objective Match', icon: '🎯', score: scores.objective_score, suggestion: scores.objective_suggestion },
-                ].map(({ label, icon, score, suggestion }) => (
+                  { label: 'Title Match', icon: '📛', score: scores.title_score, suggestion: scores.title_suggestion, section: 'title' },
+                  { label: 'Skill Match', icon: '⚡', score: scores.skill_score, suggestion: scores.skill_suggestion, section: 'skills' },
+                  { label: 'Project Match', icon: '🛠️', score: scores.project_score, suggestion: scores.project_suggestion, section: 'projects' },
+                  { label: 'Objective Match', icon: '🎯', score: scores.objective_score, suggestion: scores.objective_suggestion, section: 'objective' },
+                ].map(({ label, icon, score, suggestion, section: rowSection }) => (
                   <div className="score-row" key={label}>
                     <div className="score-top">
                       <div className="score-label-group">
@@ -287,11 +295,11 @@ export default function UploadPage() {
                       </div>
                       <div className="score-right">
                         <span className={`score-pct ${getScoreColor(score)}`}>{score}%</span>
-                        {score < 50 && label !== 'Title Match' && (
+                        {score < 90 && (
                           <button 
                             type="button" 
                             className="btn-improve"
-                            onClick={() => setImproveModal({ isOpen: true, section: label.toLowerCase().split(' ')[0] })}
+                            onClick={() => setImproveModal({ isOpen: true, section: rowSection })}
                           >
                             Improve ✨
                           </button>

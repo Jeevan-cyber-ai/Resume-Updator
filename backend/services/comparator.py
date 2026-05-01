@@ -30,7 +30,7 @@ def compare_resume_with_job(resume_data: dict, job_title: str) -> dict:
     try:
         client = genai.Client(api_key=api_key)
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-3.1-flash-lite-preview",
             contents=prompt
         )
 

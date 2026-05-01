@@ -24,7 +24,7 @@ def extract_resume_data(file_path: str) -> dict:
         return {"error": "GEMINI_API_KEY is not set in environment variables."}
 
     # 3. Define LangChain LLM
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0, google_api_key=api_key)
+    llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite-preview", temperature=0, google_api_key=api_key)
     
     # 4. Define Output Parser using the Pydantic Schema
     parser = JsonOutputParser(pydantic_object=ResumeSchema)
